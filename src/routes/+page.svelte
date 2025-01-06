@@ -17,6 +17,7 @@
     end: string,
     title: string,
     backgroundColor: string,
+    resourceIds: string[],
     extendedProps: {
       description: string,
       location: string,
@@ -30,6 +31,7 @@
     end: 'string',
     title: 'string',
     backgroundColor: 'string',
+    resourceIds: [],
     extendedProps: {
       description: 'string',
       location: 'string',
@@ -72,23 +74,22 @@
 <Calendar {plugins} {options} />
 
 <dialog id="eventModal" class="modal modal-bottom sm:modal-middle">
-  <div class="modal-box card">
+  <div class="modal-box bg-base-100 image-full shadow-xl">
     <figure>
       <img
         src="https://cdn.discordapp.com/guild-events/1316191185613881385/c571a6595399d3fb845ece4acf16477b.png?size=2048"
         alt="Shoes"
-        class="rounded-xl" />
+        class="rounded-xl p-0" />
     </figure>
-    <div class="card-body">
-      <h3 class="card-title">{modalInfo.title}</h3>
-      <p class="py-4">{modalInfo.extendedProps.description}</p>
-      <p class="py-4">{modalInfo.extendedProps.location}</p>
-      <p class="py-4">{modalInfo.extendedProps.community_name}</p>
-      <div class="card-actions modal-action justify-end">
+    <p class="py-2">{modalInfo.extendedProps.community_name}</p>
+    <h3 class="text-2xl font-bold">{modalInfo.title}</h3>
+    <p class="py-2">{modalInfo.extendedProps.description}</p>
+    <!-- <p class="py-4">{modalInfo.extendedProps.location}</p> DEPRECATED: Mostly Resonite -->
+    <div class="modal-action">
         <form method="dialog">
-          <button class="btn">Close</button>
+        <button class="btn btn-primary btn-disabled mx-2">Open Session</button>
+        <button class="btn mx-2">Close</button>
         </form>
-      </div>
     </div>
   </div>
 </dialog>

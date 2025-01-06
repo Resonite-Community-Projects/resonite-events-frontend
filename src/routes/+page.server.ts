@@ -1,4 +1,4 @@
-import type { PageServerLoad } from './$types';
+import type { PageServerLoad } from '../$types';
 
 import { DateTime } from 'luxon';
 
@@ -29,7 +29,6 @@ export const load: PageServerLoad = async () => {
 		let hash = 0;
 		str.split('').forEach((char) => {
 			hash = char.charCodeAt(0) + ((hash << 5) - hash);
-			console.log(hash);
 		});
 		let color = '#';
 		for (let i = 0; i < 3; i++) {
@@ -41,21 +40,27 @@ export const load: PageServerLoad = async () => {
 
 	const rawAPI = await fetch('https://resonite-communities.com/v1/events');
 	const apiResponse = await rawAPI.text();
-	const events = apiResponse.split('\n').map((eventRaw, i) => {
-		const event = eventRaw.split('`');
+	const rawEvents = apiResponse.split('\n').map((eventRaw) => eventRaw.split('`'));
+	const rawResources = rawEvents.map((event) => event[5]);
+	const resources = [...new Set(rawResources)].map((event, i) => {
+		return { id: i, title: event};
+	});
+	const events = rawEvents.map((event, i) => {
+		const resourceId = resources.find((resource) => resource.title === event[5]);
 		return {
 			id: i,
 			start: timeFormat(event[3]),
 			end: timeFormat(event[4]),
 			title: event[0],
 			backgroundColor: newShade(stringToColor(event[5]), 15),
+			resourceIds: resourceId ? [ resourceId.id ] : null,
 			extendedProps: {
 				description: event[1],
 				location: event[2],
-				community_name: event[5]
+				community_name: event[5],
 			}
 		};
 	});
-	console.log(events[0]);
-	return { events };
+	
+	return { events, resources };
 };
