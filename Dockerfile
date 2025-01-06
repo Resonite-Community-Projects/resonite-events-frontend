@@ -5,7 +5,8 @@ FROM oven/bun:1 AS builder
 WORKDIR /app
 
 # Get app dependencies
-COPY package*.json ./
+COPY package.json ./
+COPY bun.lockb ./
 
 # building app
 RUN bun i
