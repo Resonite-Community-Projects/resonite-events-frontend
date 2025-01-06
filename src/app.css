@@ -9,4 +9,14 @@
   h3 {
     @apply mb-5 font-bold text-lg sm:text-xl md:text-2xl;
   }
-} */
+}
+
+/* Calendar Styling */
+.ec-title { @apply pb-1 text-xl font-bold; }
+.ec-day-head, .ec-no-events { @apply bg-base-300 font-bold !important; }
+.ec-body { @apply rounded-box; }
+.ec-body, .ec-day-head { @apply border-none !important; }
+.ec-day { @apply bg-base-200 !important; }
+.ec-today { @apply bg-accent bg-opacity-20 !important; }
+.ec-button { @apply btn btn-sm !important; }
+.ec-button:disabled { @apply btn btn-sm btn-disabled !important; }
