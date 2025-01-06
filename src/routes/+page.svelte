@@ -1,6 +1,8 @@
 <script lang="ts">
+  import MoreSection from "./more.svelte";
+
   import Calendar from '@event-calendar/core';
-  
+
   // import TimeGrid from '@event-calendar/time-grid';
 
   // import Timeline from '@event-calendar/resource-timeline';
@@ -63,7 +65,6 @@
       },
       events: data.events,
       duration: { days: 4 },
-      // eventClick: function (info) { eventDetails(info) }
       eventClick: function (info: Calendar.info) {
         modalInfo = info.event;
         return eventModal.showModal();
@@ -71,7 +72,17 @@
   };
 </script>
 
-<Calendar {plugins} {options} />
+<div class="hero">
+  <div class="hero-content">
+    <h1>Upcoming Events</h1>
+  </div>
+</div>
+
+<div class="sm:px-5">
+  <Calendar {plugins} {options} />
+</div>
+
+<MoreSection />
 
 <dialog id="eventModal" class="modal modal-bottom sm:modal-middle">
   <div class="modal-box bg-base-100 image-full shadow-xl">
@@ -86,10 +97,10 @@
     <p class="py-2">{modalInfo.extendedProps.description}</p>
     <!-- <p class="py-4">{modalInfo.extendedProps.location}</p> DEPRECATED: Mostly Resonite -->
     <div class="modal-action">
-        <form method="dialog">
+      <form method="dialog">
         <button class="btn btn-primary btn-disabled mx-2">Open Session</button>
         <button class="btn mx-2">Close</button>
-        </form>
+      </form>
     </div>
   </div>
 </dialog>
