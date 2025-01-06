@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: beatbyte
+    runs-on: SANVM07
 
     steps:
       - uses: actions/checkout@v3
