@@ -1,7 +1,11 @@
 <script lang="ts">
   import Calendar from '@event-calendar/core';
   
-  import TimeGrid from '@event-calendar/time-grid';
+  // import TimeGrid from '@event-calendar/time-grid';
+
+  // import Timeline from '@event-calendar/resource-timeline';
+
+  import List from '@event-calendar/list';
 
   import type { PageData } from './$types';
 
@@ -33,9 +37,28 @@
     }
   });
 
-  const plugins = [ TimeGrid ];
+  // const plugins = [ TimeGrid, Timeline, List ];
+  const plugins = [ List ];
   const options = {
-      view: 'timeGridWeek',
+      nowIndicator: true,
+      view: 'listWeek',
+      // views: {
+      //   resourceTimelineWeek: {
+      //     slotWidth: 80,
+      //     resources: data.resources,
+      //     duration: { days: 1 },
+      //   },
+      //   listWeek: {
+      //     resources: data.resources,
+      //     duration: { week: 1 },
+      //   }
+      // },
+      headerToolbar: {
+        // start: 'resourceTimelineWeek,timeGridWeek,listWeek',
+        start: '',
+        center: 'title',
+        end: 'prev next today'
+      },
       events: data.events,
       duration: { days: 4 },
       // eventClick: function (info) { eventDetails(info) }
